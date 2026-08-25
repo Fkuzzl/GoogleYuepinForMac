@@ -9,7 +9,8 @@ An unofficial, personal macOS Cantonese input source that reproduces the typing 
 
 - Windows source preparation: implemented.
 - Google response contract: covered by fixtures and a live validation script.
-- Xcode build and macOS InputMethodKit runtime: must be verified on an Apple-Silicon Mac running macOS 15 or newer.
+- Xcode build: verified by GitHub Actions on Apple Silicon with macOS 15 and Xcode 16.
+- macOS InputMethodKit installation and live typing: still needs verification on a local Mac.
 - Distribution: personal/local build only; not notarized.
 
 ## Behaviour
