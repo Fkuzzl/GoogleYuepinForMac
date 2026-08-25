@@ -9,6 +9,7 @@ destination_directory="${HOME}/Library/Input Methods"
 destination_app="${destination_directory}/GoogleYuepinForMac.app"
 legacy_system_app="/Library/Input Methods/GoogleYuepinForMac.app"
 legacy_source_app="${project_root}/.build/xcode/Build/Products/Release/GoogleYuepinForMac.app"
+xcode_derived_data_root="${HOME}/Library/Developer/Xcode/DerivedData"
 lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 
 cd "${project_root}"
@@ -41,9 +42,22 @@ fi
 /usr/bin/codesign --verify --deep --strict --verbose=2 "${destination_app}"
 
 # TIS can reject an otherwise valid input source when another app bundle on
-# disk advertises the same bundle and input-mode IDs. Remove only generated
-# copies whose bundle identifier matches this project before registration.
-for generated_copy in "${source_app}" "${legacy_source_app}"; do
+# disk advertises the same bundle and input-mode IDs. Include products created
+# by Xcode's default DerivedData location, then remove only copies whose bundle
+# identifier matches this project before registration.
+generated_copies=("${source_app}" "${legacy_source_app}")
+if [[ -d "${xcode_derived_data_root}" ]]; then
+  while IFS= read -r -d '' generated_info; do
+    generated_copies+=("${generated_info:h:h}")
+  done < <(
+    /usr/bin/find "${xcode_derived_data_root}" \
+      -type f \
+      -path '*/Build/Products/*/GoogleYuepinForMac.app/Contents/Info.plist' \
+      -print0 2>/dev/null
+  )
+fi
+
+for generated_copy in "${generated_copies[@]}"; do
   if [[ ! -d "${generated_copy}" ]]; then
     continue
   fi
