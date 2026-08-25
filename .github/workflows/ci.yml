@@ -45,7 +45,7 @@ jobs:
           app="${user_temp%/}/GoogleYuepinForMacDerivedData/Build/Products/Release/GoogleYuepinForMac.app"
           test -d "$app"
           test "$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "$app/Contents/Info.plist")" = "yue-Hant"
-          test "$(/usr/libexec/PlistBuddy -c 'Print :TISInputSourceID' "$app/Contents/Info.plist")" = "local.googleyuepinformac.inputmethod"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :ComponentInputModeDict:tsInputModeListKey:local.googleyuepinformac.inputmethod.GoogleYuepinIM:TISInputSourceID' "$app/Contents/Info.plist")" = "local.googleyuepinformac.inputmethod.GoogleYuepinIM"
           test "$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "$app/Contents/Info.plist")" = "true"
           test -f "$app/Contents/Resources/InputSourceIcon.png"
           test -f "$app/Contents/PkgInfo"
