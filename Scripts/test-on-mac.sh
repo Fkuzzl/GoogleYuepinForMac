@@ -49,21 +49,14 @@ echo "macOS ${macos_version}, $(/usr/bin/uname -m)"
 echo "Running core tests..."
 /usr/bin/xcrun swift test
 
-echo "Building the Release input source..."
-/usr/bin/xcodebuild \
-  -project GoogleYuepinForMac.xcodeproj \
-  -scheme GoogleYuepinForMac \
-  -configuration Release \
-  -derivedDataPath "${derived_data}" \
-  build
+/bin/zsh "${project_root}/Scripts/build-local.sh"
 
 if [[ ! -d "${app}" ]]; then
   echo "error: Build succeeded but ${app} was not found."
   exit 1
 fi
 
-echo "Verifying signature and input-source metadata..."
-/usr/bin/codesign --verify --deep --strict "${app}"
+echo "Verifying input-source metadata..."
 
 bundle_identifier="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${info_plist}")"
 language="$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "${info_plist}")"

@@ -8,19 +8,12 @@ destination_app="/Library/Input Methods/GoogleYuepinForMac.app"
 
 cd "${project_root}"
 
-/usr/bin/xcodebuild \
-  -project GoogleYuepinForMac.xcodeproj \
-  -scheme GoogleYuepinForMac \
-  -configuration Release \
-  -derivedDataPath "${derived_data}" \
-  build
+/bin/zsh "${project_root}/Scripts/build-local.sh"
 
 if [[ ! -d "${source_app}" ]]; then
   echo "error: Build succeeded but ${source_app} was not found."
   exit 1
 fi
-
-/usr/bin/codesign --verify --deep --strict "${source_app}"
 
 if [[ -d "${destination_app}" ]]; then
   /usr/bin/osascript -e 'tell application id "local.googleyuepinformac.inputmethod" to quit' >/dev/null 2>&1 || true

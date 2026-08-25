@@ -20,23 +20,18 @@ jobs:
 
       - name: Validate Mac scripts
         run: |
+          /bin/zsh -n Scripts/build-local.sh
           /bin/zsh -n Scripts/test-on-mac.sh
           /bin/zsh -n Scripts/install-local.sh
           /bin/zsh -n Scripts/prepare-icon.sh
 
       - name: Build InputMethodKit application
-        run: |
-          xcodebuild \
-            -project GoogleYuepinForMac.xcodeproj \
-            -scheme GoogleYuepinForMac \
-            -configuration Debug \
-            -derivedDataPath .build/xcode \
-            CODE_SIGNING_ALLOWED=NO \
-            build
+        run: /bin/zsh Scripts/build-local.sh
 
       - name: Verify built metadata
         run: |
-          app=.build/xcode/Build/Products/Debug/GoogleYuepinForMac.app
+          app=.build/xcode/Build/Products/Release/GoogleYuepinForMac.app
           test -d "$app"
           test "$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "$app/Contents/Info.plist")" = "yue-Hant"
           test -f "$app/Contents/Resources/InputSourceIcon.png"
+          codesign --verify --deep --strict "$app"

@@ -44,7 +44,9 @@ cd GoogleYuepinForMac
 ```
 
 Run the Mac preflight. It checks the machine and Xcode setup, runs the core tests,
-builds the signed Release app, and verifies the input-source metadata:
+builds the Release app with a local ad-hoc signature, and verifies the
+input-source metadata. A paid Apple Developer account is not required for this
+personal installation:
 
 ```zsh
 /bin/zsh Scripts/test-on-mac.sh

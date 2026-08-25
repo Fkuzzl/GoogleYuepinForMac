@@ -22,6 +22,7 @@ $requiredFiles = @(
     'Sources/GoogleYuepinCore/CompositionEngine.swift',
     'Sources/GoogleYuepinCore/GoogleResponseParser.swift',
     'Tests/GoogleYuepinCoreTests/Fixtures/nei-success.json',
+    'Scripts/build-local.sh',
     'Scripts/test-on-mac.sh',
     'Scripts/install-local.sh'
 )
@@ -62,6 +63,7 @@ Assert-True ($infoText.Contains('local.googleyuepinformac.inputmethod.GoogleYuep
 $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac/GoogleYuepinForMac.entitlements')
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'
 Assert-True ($entitlementsText.Contains('com.apple.security.temporary-exception.mach-register.global-name')) 'InputMethodKit Mach entitlement is missing.'
+Assert-True ($entitlementsText.Contains('local.googleyuepinformac.inputmethod_Connection')) 'InputMethodKit connection entitlement is inconsistent.'
 
 $projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
 Assert-True ($projectText.Contains('PRODUCT_BUNDLE_IDENTIFIER = local.googleyuepinformac.inputmethod;')) 'Xcode bundle ID is inconsistent.'
