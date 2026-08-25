@@ -1,0 +1,257 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A00000000000000000000001 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* main.swift */; };
+		A00000000000000000000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* AppDelegate.swift */; };
+		A00000000000000000000003 /* GoogleYuepinInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* GoogleYuepinInputController.swift */; };
+		A00000000000000000000004 /* ChinesePunctuation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000004 /* ChinesePunctuation.swift */; };
+		A00000000000000000000005 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000005 /* Candidate.swift */; };
+		A00000000000000000000006 /* GoogleResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000006 /* GoogleResponseParser.swift */; };
+		A00000000000000000000007 /* CompositionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000007 /* CompositionEngine.swift */; };
+		A00000000000000000000008 /* CandidateProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000008 /* CandidateProvider.swift */; };
+		A00000000000000000000009 /* CandidateCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000009 /* CandidateCache.swift */; };
+		A0000000000000000000000A /* CachedCandidateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000A /* CachedCandidateService.swift */; };
+		A0000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* PrivacyInfo.xcprivacy */; };
+		A0000000000000000000000C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C00000000000000000000005 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B00000000000000000000001 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B00000000000000000000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B00000000000000000000003 /* GoogleYuepinInputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleYuepinInputController.swift; sourceTree = "<group>"; };
+		B00000000000000000000004 /* ChinesePunctuation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinesePunctuation.swift; sourceTree = "<group>"; };
+		B00000000000000000000005 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		B00000000000000000000006 /* GoogleResponseParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleResponseParser.swift; sourceTree = "<group>"; };
+		B00000000000000000000007 /* CompositionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionEngine.swift; sourceTree = "<group>"; };
+		B00000000000000000000008 /* CandidateProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateProvider.swift; sourceTree = "<group>"; };
+		B00000000000000000000009 /* CandidateCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateCache.swift; sourceTree = "<group>"; };
+		B0000000000000000000000A /* CachedCandidateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedCandidateService.swift; sourceTree = "<group>"; };
+		B0000000000000000000000B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B0000000000000000000000C /* GoogleYuepinForMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GoogleYuepinForMac.entitlements; sourceTree = "<group>"; };
+		B0000000000000000000000D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		B0000000000000000000000E /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B0000000000000000000000F /* InputSourceIcon.svg */ = {isa = PBXFileReference; lastKnownFileType = image.svg; path = InputSourceIcon.svg; sourceTree = "<group>"; };
+		B00000000000000000000010 /* prepare-icon.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "prepare-icon.sh"; sourceTree = "<group>"; };
+		B00000000000000000000020 /* GoogleYuepinForMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleYuepinForMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D00000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C00000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				C00000000000000000000002 /* GoogleYuepinForMac */,
+				C00000000000000000000003 /* Core */,
+				C00000000000000000000004 /* Scripts */,
+				C00000000000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C00000000000000000000002 /* GoogleYuepinForMac */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000001 /* main.swift */,
+				B00000000000000000000002 /* AppDelegate.swift */,
+				B00000000000000000000003 /* GoogleYuepinInputController.swift */,
+				B00000000000000000000004 /* ChinesePunctuation.swift */,
+				B0000000000000000000000B /* Info.plist */,
+				B0000000000000000000000C /* GoogleYuepinForMac.entitlements */,
+				B0000000000000000000000D /* PrivacyInfo.xcprivacy */,
+				C00000000000000000000005 /* InfoPlist.strings */,
+				C00000000000000000000007 /* Resources */,
+			);
+			path = GoogleYuepinForMac;
+			sourceTree = "<group>";
+		};
+		C00000000000000000000003 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B00000000000000000000005 /* Candidate.swift */,
+				B00000000000000000000006 /* GoogleResponseParser.swift */,
+				B00000000000000000000007 /* CompositionEngine.swift */,
+				B00000000000000000000008 /* CandidateProvider.swift */,
+				B00000000000000000000009 /* CandidateCache.swift */,
+				B0000000000000000000000A /* CachedCandidateService.swift */,
+			);
+			path = Sources/GoogleYuepinCore;
+			sourceTree = SOURCE_ROOT;
+		};
+		C00000000000000000000004 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (B00000000000000000000010 /* prepare-icon.sh */);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
+		C00000000000000000000005 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (B0000000000000000000000E /* InfoPlist.strings */);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C00000000000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (B00000000000000000000020 /* GoogleYuepinForMac.app */);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C00000000000000000000007 /* Resources */ = {
+			isa = PBXGroup;
+			children = (B0000000000000000000000F /* InputSourceIcon.svg */);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E00000000000000000000001 /* GoogleYuepinForMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 120000000000000000000002 /* Build configuration list for PBXNativeTarget */;
+			buildPhases = (
+				D00000000000000000000001 /* Sources */,
+				D00000000000000000000002 /* Resources */,
+				D00000000000000000000004 /* Generate Input Source Icon */,
+				D00000000000000000000003 /* Frameworks */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = GoogleYuepinForMac;
+			productName = GoogleYuepinForMac;
+			productReference = B00000000000000000000020 /* GoogleYuepinForMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = { E00000000000000000000001 = {CreatedOnToolsVersion = 16.0;}; };
+			};
+			buildConfigurationList = 120000000000000000000001 /* Build configuration list for PBXProject */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base, "zh-Hant");
+			mainGroup = C00000000000000000000001;
+			productRefGroup = C00000000000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (E00000000000000000000001 /* GoogleYuepinForMac */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D00000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */,
+				A0000000000000000000000C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D00000000000000000000004 /* Generate Input Source Icon */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			inputPaths = (
+				"$(SRCROOT)/GoogleYuepinForMac/Resources/InputSourceIcon.svg",
+				"$(SRCROOT)/Scripts/prepare-icon.sh",
+			);
+			name = "Generate Input Source Icon";
+			outputPaths = ("$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/InputSourceIcon.png");
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/zsh;
+			shellScript = "/bin/zsh \"${SRCROOT}/Scripts/prepare-icon.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D00000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A00000000000000000000001 /* main.swift in Sources */,
+				A00000000000000000000002 /* AppDelegate.swift in Sources */,
+				A00000000000000000000003 /* GoogleYuepinInputController.swift in Sources */,
+				A00000000000000000000004 /* ChinesePunctuation.swift in Sources */,
+				A00000000000000000000005 /* Candidate.swift in Sources */,
+				A00000000000000000000006 /* GoogleResponseParser.swift in Sources */,
+				A00000000000000000000007 /* CompositionEngine.swift in Sources */,
+				A00000000000000000000008 /* CandidateProvider.swift in Sources */,
+				A00000000000000000000009 /* CandidateCache.swift in Sources */,
+				A0000000000000000000000A /* CachedCandidateService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		110000000000000000000001 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 15.0; SDKROOT = macosx; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone";}; name = Debug;};
+		110000000000000000000002 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; MACOSX_DEPLOYMENT_TARGET = 15.0; SDKROOT = macosx; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O";}; name = Release;};
+		110000000000000000000003 /* Debug */ = {isa = XCBuildConfiguration; buildSettings = {
+			ARCHS = arm64;
+			CODE_SIGN_ENTITLEMENTS = GoogleYuepinForMac/GoogleYuepinForMac.entitlements;
+			CODE_SIGN_IDENTITY = "-";
+			CODE_SIGN_STYLE = Manual;
+			CURRENT_PROJECT_VERSION = 1;
+			ENABLE_HARDENED_RUNTIME = YES;
+			GENERATE_INFOPLIST_FILE = NO;
+			INFOPLIST_FILE = GoogleYuepinForMac/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+			MACOSX_DEPLOYMENT_TARGET = 15.0;
+			MARKETING_VERSION = 0.1.0;
+			ONLY_ACTIVE_ARCH = YES;
+			OTHER_LDFLAGS = "-lsqlite3";
+			PRODUCT_BUNDLE_IDENTIFIER = local.googleyuepinformac.inputmethod;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_EMIT_LOC_STRINGS = YES;
+			SWIFT_VERSION = 5.0;
+		}; name = Debug;};
+		110000000000000000000004 /* Release */ = {isa = XCBuildConfiguration; buildSettings = {
+			ARCHS = arm64;
+			CODE_SIGN_ENTITLEMENTS = GoogleYuepinForMac/GoogleYuepinForMac.entitlements;
+			CODE_SIGN_IDENTITY = "-";
+			CODE_SIGN_STYLE = Manual;
+			CURRENT_PROJECT_VERSION = 1;
+			ENABLE_HARDENED_RUNTIME = YES;
+			GENERATE_INFOPLIST_FILE = NO;
+			INFOPLIST_FILE = GoogleYuepinForMac/Info.plist;
+			LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+			MACOSX_DEPLOYMENT_TARGET = 15.0;
+			MARKETING_VERSION = 0.1.0;
+			OTHER_LDFLAGS = "-lsqlite3";
+			PRODUCT_BUNDLE_IDENTIFIER = local.googleyuepinformac.inputmethod;
+			PRODUCT_NAME = "$(TARGET_NAME)";
+			SWIFT_EMIT_LOC_STRINGS = YES;
+			SWIFT_VERSION = 5.0;
+		}; name = Release;};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		120000000000000000000001 /* Build configuration list for PBXProject */ = {isa = XCConfigurationList; buildConfigurations = (110000000000000000000001 /* Debug */, 110000000000000000000002 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+		120000000000000000000002 /* Build configuration list for PBXNativeTarget */ = {isa = XCConfigurationList; buildConfigurations = (110000000000000000000003 /* Debug */, 110000000000000000000004 /* Release */); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+/* End XCConfigurationList section */
+	};
+	rootObject = F00000000000000000000001 /* Project object */;
+}

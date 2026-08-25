@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key><string>en</string>
+    <key>CFBundleDisplayName</key><string>Google粵拼forMac</string>
+    <key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+    <key>CFBundleName</key><string>GoogleYuepinForMac</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>0.1.0</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>ComponentInputModeDict</key>
+    <dict>
+        <key>tsInputModeListKey</key>
+        <dict>
+            <key>local.googleyuepinformac.inputmethod.GoogleYuepinIM</key>
+            <dict>
+                <key>TISIconLabels</key>
+                <dict><key>Primary</key><string>粵</string></dict>
+                <key>TISInputSourceID</key>
+                <string>local.googleyuepinformac.inputmethod.GoogleYuepinIM</string>
+                <key>TISIntendedLanguage</key><string>yue-Hant</string>
+                <key>tsInputModeDefaultStateKey</key><true/>
+                <key>tsInputModeIsVisibleKey</key><true/>
+                <key>tsInputModeMenuIconFileKey</key><string>InputSourceIcon.png</string>
+                <key>tsInputModePrimaryInScriptKey</key><true/>
+                <key>tsInputModeScriptKey</key><string>smUnicodeScript</string>
+            </dict>
+        </dict>
+        <key>tsVisibleInputModeOrderedArrayKey</key>
+        <array><string>local.googleyuepinformac.inputmethod.GoogleYuepinIM</string></array>
+    </dict>
+    <key>InputMethodConnectionName</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
+    <key>InputMethodServerControllerClass</key><string>$(PRODUCT_MODULE_NAME).GoogleYuepinInputController</string>
+    <key>InputMethodServerDelegateClass</key><string>$(PRODUCT_MODULE_NAME).GoogleYuepinInputController</string>
+    <key>LSBackgroundOnly</key><true/>
+    <key>LSMinimumSystemVersion</key><string>15.0</string>
+    <key>NSHumanReadableCopyright</key><string>Unofficial personal Cantonese input source.</string>
+    <key>TICapsLockLanguageSwitchCapable</key><true/>
+    <key>TISIntendedLanguage</key><string>yue-Hant</string>
+    <key>tsInputMethodCharacterRepertoireKey</key>
+    <array><string>Hant</string></array>
+    <key>tsInputMethodIconFileKey</key><string>InputSourceIcon.png</string>
+</dict>
+</plist>

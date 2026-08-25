@@ -1,0 +1,36 @@
+name: macOS validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run core tests
+        run: swift test
+
+      - name: Build InputMethodKit application
+        run: |
+          xcodebuild \
+            -project GoogleYuepinForMac.xcodeproj \
+            -scheme GoogleYuepinForMac \
+            -configuration Debug \
+            -derivedDataPath .build/xcode \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Verify built metadata
+        run: |
+          app=.build/xcode/Build/Products/Debug/GoogleYuepinForMac.app
+          test -d "$app"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "$app/Contents/Info.plist")" = "yue-Hant"
+          test -f "$app/Contents/Resources/InputSourceIcon.png"
