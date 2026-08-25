@@ -2,7 +2,8 @@
 set -euo pipefail
 
 project_root="${0:A:h:h}"
-derived_data="${project_root}/.build/xcode"
+user_temp="${TMPDIR:-/private/tmp}"
+derived_data="${GOOGLE_YUEPIN_DERIVED_DATA:-${user_temp%/}/GoogleYuepinForMacDerivedData}"
 app="${derived_data}/Build/Products/Release/GoogleYuepinForMac.app"
 info_plist="${app}/Contents/Info.plist"
 

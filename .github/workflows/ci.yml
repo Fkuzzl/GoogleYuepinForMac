@@ -30,7 +30,8 @@ jobs:
 
       - name: Verify built metadata
         run: |
-          app=.build/xcode/Build/Products/Release/GoogleYuepinForMac.app
+          user_temp="${TMPDIR:-/private/tmp}"
+          app="${user_temp%/}/GoogleYuepinForMacDerivedData/Build/Products/Release/GoogleYuepinForMac.app"
           test -d "$app"
           test "$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "$app/Contents/Info.plist")" = "yue-Hant"
           test -f "$app/Contents/Resources/InputSourceIcon.png"

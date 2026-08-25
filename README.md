@@ -52,11 +52,11 @@ personal installation:
 /bin/zsh Scripts/test-on-mac.sh
 ```
 
-The built input source will be at:
-
-```text
-.build/xcode/Build/Products/Release/GoogleYuepinForMac.app
-```
+The preflight prints the exact built-app path. By default, DerivedData is placed
+in macOS's per-user temporary directory rather than inside the repository. This
+prevents iCloud Drive and other File Provider services from attaching metadata
+that invalidates local code signing. Advanced users can override the location
+with `GOOGLE_YUEPIN_DERIVED_DATA`.
 
 ## Install for local testing
 

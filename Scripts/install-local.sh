@@ -2,7 +2,8 @@
 set -euo pipefail
 
 project_root="${0:A:h:h}"
-derived_data="${project_root}/.build/xcode"
+user_temp="${TMPDIR:-/private/tmp}"
+derived_data="${GOOGLE_YUEPIN_DERIVED_DATA:-${user_temp%/}/GoogleYuepinForMacDerivedData}"
 source_app="${derived_data}/Build/Products/Release/GoogleYuepinForMac.app"
 destination_app="/Library/Input Methods/GoogleYuepinForMac.app"
 lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"

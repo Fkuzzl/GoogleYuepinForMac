@@ -2,7 +2,8 @@
 set -euo pipefail
 
 project_root="${0:A:h:h}"
-derived_data="${project_root}/.build/xcode"
+user_temp="${TMPDIR:-/private/tmp}"
+derived_data="${GOOGLE_YUEPIN_DERIVED_DATA:-${user_temp%/}/GoogleYuepinForMacDerivedData}"
 app="${derived_data}/Build/Products/Release/GoogleYuepinForMac.app"
 entitlements="${project_root}/GoogleYuepinForMac/GoogleYuepinForMac.entitlements"
 
@@ -24,9 +25,9 @@ fi
 
 /usr/bin/plutil -lint "${entitlements}" >/dev/null
 
-# Sign only the derived build product. This avoids requiring an Apple Developer
-# certificate for a personal, local installation and removes metadata that
-# macOS rejects when sealing an app bundle.
+# Sign only the derived build product. DerivedData defaults outside the project
+# so iCloud/File Provider cannot continuously reattach metadata while codesign
+# seals the app. The cleanup remains as a final defense before signing.
 /usr/bin/xattr -cr "${app}"
 /usr/bin/codesign \
   --force \
