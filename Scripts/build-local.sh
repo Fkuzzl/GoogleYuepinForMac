@@ -23,6 +23,12 @@ if [[ ! -d "${app}" ]]; then
   exit 1
 fi
 
+# Force LaunchServices/TIS to read fresh metadata on every local build instead
+# of reusing a cached record for the fixed development bundle identifier.
+build_number="$(/bin/date +%s)"
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${build_number}" "${app}/Contents/Info.plist"
+/usr/bin/printf 'APPL????' > "${app}/Contents/PkgInfo"
+
 /usr/bin/plutil -lint "${entitlements}" >/dev/null
 
 # Sign only the derived build product. DerivedData defaults outside the project

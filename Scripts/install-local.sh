@@ -8,6 +8,7 @@ source_app="${derived_data}/Build/Products/Release/GoogleYuepinForMac.app"
 destination_directory="${HOME}/Library/Input Methods"
 destination_app="${destination_directory}/GoogleYuepinForMac.app"
 legacy_system_app="/Library/Input Methods/GoogleYuepinForMac.app"
+legacy_source_app="${project_root}/.build/xcode/Build/Products/Release/GoogleYuepinForMac.app"
 lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
 
 cd "${project_root}"
@@ -38,6 +39,23 @@ fi
 /usr/bin/ditto "${source_app}" "${destination_app}"
 /usr/bin/xattr -cr "${destination_app}"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "${destination_app}"
+
+# TIS can reject an otherwise valid input source when another app bundle on
+# disk advertises the same bundle and input-mode IDs. Remove only generated
+# copies whose bundle identifier matches this project before registration.
+for generated_copy in "${source_app}" "${legacy_source_app}"; do
+  if [[ ! -d "${generated_copy}" ]]; then
+    continue
+  fi
+  generated_identifier="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${generated_copy}/Contents/Info.plist" 2>/dev/null || true)"
+  if [[ "${generated_identifier}" != "local.googleyuepinformac.inputmethod" ]]; then
+    echo "error: Refusing to remove unexpected generated app: ${generated_copy}"
+    exit 1
+  fi
+  "${lsregister}" -u "${generated_copy}" >/dev/null 2>&1 || true
+  /bin/rm -rf "${generated_copy}"
+done
+
 "${lsregister}" -f "${destination_app}"
 
 if ! "${destination_app}/Contents/MacOS/GoogleYuepinForMac" --register; then

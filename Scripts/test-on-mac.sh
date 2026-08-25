@@ -62,6 +62,8 @@ echo "Verifying input-source metadata..."
 bundle_identifier="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${info_plist}")"
 language="$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "${info_plist}")"
 minimum_system="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "${info_plist}")"
+input_source_identifier="$(/usr/libexec/PlistBuddy -c 'Print :TISInputSourceID' "${info_plist}")"
+ui_element="$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "${info_plist}")"
 
 [[ "${bundle_identifier}" == "local.googleyuepinformac.inputmethod" ]] || {
   echo "error: Unexpected bundle identifier: ${bundle_identifier}"
@@ -75,8 +77,20 @@ minimum_system="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "${
   echo "error: Unexpected minimum macOS version: ${minimum_system}"
   exit 1
 }
+[[ "${input_source_identifier}" == "local.googleyuepinformac.inputmethod" ]] || {
+  echo "error: Unexpected top-level input-source identifier: ${input_source_identifier}"
+  exit 1
+}
+[[ "${ui_element}" == "true" ]] || {
+  echo "error: Input method must run as a UI agent."
+  exit 1
+}
 [[ -f "${app}/Contents/Resources/InputSourceIcon.png" ]] || {
   echo "error: Input-source icon is missing from the built app."
+  exit 1
+}
+[[ -f "${app}/Contents/PkgInfo" ]] || {
+  echo "error: PkgInfo is missing from the built app."
   exit 1
 }
 

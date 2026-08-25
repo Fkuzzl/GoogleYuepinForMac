@@ -59,6 +59,8 @@ $infoText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinF
 Assert-True ($infoText.Contains('<string>yue-Hant</string>')) 'Info.plist does not declare yue-Hant.'
 Assert-True ($infoText.Contains('<string>Hant</string>')) 'Info.plist does not declare the Hant repertoire.'
 Assert-True ($infoText.Contains('local.googleyuepinformac.inputmethod.GoogleYuepinIM')) 'Input mode ID is missing from Info.plist.'
+Assert-True ($infoText.Contains('<key>TISInputSourceID</key><string>local.googleyuepinformac.inputmethod</string>')) 'Top-level input-source ID is missing from Info.plist.'
+Assert-True ($infoText.Contains('<key>LSUIElement</key><true/>')) 'Info.plist does not mark the input method as a UI agent.'
 
 $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac/GoogleYuepinForMac.entitlements')
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'

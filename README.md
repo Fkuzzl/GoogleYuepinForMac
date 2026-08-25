@@ -69,7 +69,8 @@ for your Mac administrator password once to remove that duplicate:
 /bin/zsh Scripts/install-local.sh
 ```
 
-The installer registers and enables the source for the current user. Then:
+The installer removes generated duplicate app bundles, registers the single
+installed copy, and enables the source for the current user. Then:
 
 1. Check the macOS input menu for **Google粵拼forMac**.
 2. If it is not shown immediately, log out of macOS and log in again.
