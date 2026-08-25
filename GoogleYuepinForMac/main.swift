@@ -1,10 +1,12 @@
 import AppKit
 
-if AppDelegate.handleRegistrationArgument() {
-    exit(0)
-}
+MainActor.assumeIsolated {
+    if AppDelegate.handleRegistrationArgument() {
+        exit(0)
+    }
 
-let application = NSApplication.shared
-let applicationDelegate = AppDelegate()
-application.delegate = applicationDelegate
-application.run()
+    let application = NSApplication.shared
+    let applicationDelegate = AppDelegate()
+    application.delegate = applicationDelegate
+    application.run()
+}
