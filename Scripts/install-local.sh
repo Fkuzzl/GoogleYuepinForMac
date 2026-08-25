@@ -25,15 +25,33 @@ fi
 /usr/bin/sudo /bin/mkdir -p "/Library/Input Methods"
 /usr/bin/sudo /bin/rm -rf "${destination_app}"
 /usr/bin/sudo /usr/bin/ditto "${source_app}" "${destination_app}"
+/usr/bin/sudo /usr/bin/xattr -cr "${destination_app}"
+/usr/bin/codesign --verify --deep --strict --verbose=2 "${destination_app}"
 "${lsregister}" -f "${destination_app}"
 
 if ! "${destination_app}/Contents/MacOS/GoogleYuepinForMac" --register; then
-  echo "error: macOS copied the app but did not recognize its input source."
+  echo "error: macOS rejected input-source registration."
   exit 1
 fi
 
 /usr/bin/killall imklaunchagent >/dev/null 2>&1 || true
 /usr/bin/killall TextInputMenuAgent >/dev/null 2>&1 || true
+/bin/sleep 1
+
+enabled=false
+for attempt in {1..10}; do
+  if "${destination_app}/Contents/MacOS/GoogleYuepinForMac" --enable; then
+    enabled=true
+    break
+  fi
+  /bin/sleep 0.5
+done
+
+if [[ "${enabled}" != true ]]; then
+  echo "error: macOS registered the app but did not expose its input source after 10 attempts."
+  exit 1
+fi
+
 /usr/bin/open "${destination_app}" >/dev/null 2>&1 || true
 
 echo "Installed ${destination_app}"

@@ -1,8 +1,8 @@
 import AppKit
 
 MainActor.assumeIsolated {
-    if let registrationExitCode = AppDelegate.handleRegistrationArgument() {
-        exit(registrationExitCode)
+    if let commandExitCode = AppDelegate.handleCommandLineArguments() {
+        exit(commandExitCode)
     }
 
     let application = NSApplication.shared

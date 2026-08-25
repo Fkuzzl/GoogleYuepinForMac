@@ -39,21 +39,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         Self.logger.notice("GoogleYuepinForMac input method server started")
     }
 
-    static func handleRegistrationArgument() -> Int32? {
-        guard CommandLine.arguments.contains("--register") else { return nil }
+    static func handleCommandLineArguments() -> Int32? {
+        if CommandLine.arguments.contains("--register") {
+            return registerInputSource()
+        }
+        if CommandLine.arguments.contains("--enable") {
+            return enableInputSource()
+        }
+        return nil
+    }
+
+    private static func registerInputSource() -> Int32 {
         let result = TISRegisterInputSource(Bundle.main.bundleURL as CFURL)
         if result != noErr {
             fputs("Failed to register input source (OSStatus \(result)).\n", stderr)
             return 1
         }
+        print("Registered GoogleYuepinForMac with Text Input Source Services.")
+        return 0
+    }
 
+    private static func enableInputSource() -> Int32 {
         let enabledCount = enableRegisteredInputSources()
         guard enabledCount > 0 else {
-            fputs("Registered the app, but macOS did not discover its input sources.\n", stderr)
+            fputs("macOS has not discovered the registered input source yet.\n", stderr)
             return 1
         }
 
-        print("Registered and enabled GoogleYuepinForMac (\(enabledCount) input source records).")
+        print("Enabled GoogleYuepinForMac (\(enabledCount) input source records).")
         return 0
     }
 
