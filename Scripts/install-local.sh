@@ -77,12 +77,14 @@ for attempt in {1..10}; do
 done
 
 if [[ "${enabled}" != true ]]; then
-  echo "error: macOS registered the app but did not expose its input source after 10 attempts."
-  exit 1
+  echo "Installed ${destination_app}"
+  echo "Registration succeeded, but macOS has not refreshed input sources in this login session."
+  echo "Log out of macOS and log back in, then add Google粵拼forMac in:"
+  echo "System Settings > Keyboard > Text Input > Edit > + > Cantonese, Traditional"
+  exit 0
 fi
 
 /usr/bin/open "${destination_app}" >/dev/null 2>&1 || true
 
 echo "Installed ${destination_app}"
 echo "Registered and enabled Google粵拼forMac for the current user."
-echo "If the input menu does not refresh immediately, log out and back in once."

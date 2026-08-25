@@ -27,7 +27,10 @@
                 <key>tsInputModeIsVisibleKey</key><true/>
                 <key>tsInputModeCharacterRepertoireKey</key>
                 <array><string>Hant</string></array>
+                <key>tsInputModeAlternateMenuIconFileKey</key><string>InputSourceIcon.png</string>
+                <key>tsInputModeKeyEquivalentModifiersKey</key><integer>4608</integer>
                 <key>tsInputModeMenuIconFileKey</key><string>InputSourceIcon.png</string>
+                <key>tsInputModePaletteIconFileKey</key><string>InputSourceIcon.png</string>
                 <key>tsInputModePrimaryInScriptKey</key><true/>
                 <key>tsInputModeScriptKey</key><string>smUnicodeScript</string>
             </dict>
@@ -36,14 +39,14 @@
         <array><string>local.googleyuepinformac.inputmethod.GoogleYuepinIM</string></array>
     </dict>
     <key>InputMethodConnectionName</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
-    <key>InputMethodServerControllerClass</key><string>$(PRODUCT_MODULE_NAME).GoogleYuepinInputController</string>
-    <key>InputMethodServerDelegateClass</key><string>$(PRODUCT_MODULE_NAME).GoogleYuepinInputController</string>
-    <key>LSBackgroundOnly</key><false/>
+    <key>InputMethodServerControllerClass</key><string>GoogleYuepinInputController</string>
+    <key>InputMethodServerDelegateClass</key><string>GoogleYuepinInputController</string>
+    <key>LSBackgroundOnly</key><true/>
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>LSUIElement</key><true/>
+    <key>NSPrincipalClass</key><string>NSApplication</string>
     <key>NSHumanReadableCopyright</key><string>Unofficial personal Cantonese input source.</string>
     <key>TICapsLockLanguageSwitchCapable</key><true/>
-    <key>TISInputSourceID</key><string>local.googleyuepinformac.inputmethod</string>
     <key>TISIntendedLanguage</key><string>yue-Hant</string>
     <key>tsInputMethodCharacterRepertoireKey</key>
     <array><string>Hant</string></array>

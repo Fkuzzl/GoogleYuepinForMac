@@ -10,7 +10,7 @@ An unofficial, personal macOS Cantonese input source that reproduces the typing 
 - Windows source preparation: implemented.
 - Google response contract: covered by fixtures and a live validation script.
 - Xcode build: verified by GitHub Actions on Apple Silicon with macOS 15 and Xcode 16.
-- macOS InputMethodKit installation and live typing: still needs verification on a local Mac.
+- macOS InputMethodKit build, signing, installation, and server launch: verified on a local Mac.
 - Distribution: personal/local build only; not notarized.
 
 ## Behaviour
@@ -71,19 +71,22 @@ with `GOOGLE_YUEPIN_DERIVED_DATA`.
 ## Install for local testing
 
 Installation writes to the current user's `~/Library/Input Methods` directory.
-The installed app retains the Apple Development signature produced by Xcode. If
-an older development copy exists in `/Library/Input Methods`, the installer asks
+The app must have an Apple Development signature; an ad-hoc signature is not
+accepted by current macOS input-source discovery. If an older development copy
+exists in `/Library/Input Methods`, the installer asks
 for your Mac administrator password once to remove that duplicate:
 
 ```zsh
 /bin/zsh Scripts/install-local.sh
 ```
 
-The installer removes generated duplicate app bundles, registers the single
-installed copy, and enables the source for the current user. Then:
+The installer removes generated duplicate app bundles and registers the single
+installed copy. macOS may not expose a newly installed or modified input method
+until the next login session. Then:
 
 1. Check the macOS input menu for **Google粵拼forMac**.
-2. If it is not shown immediately, log out of macOS and log in again.
+2. If it is not shown immediately, log out of macOS and log in again. Repeated
+   registration attempts cannot replace this session refresh on recent macOS.
 3. If needed, open System Settings → Keyboard → Text Input → Edit, click `+`,
    and look under **Cantonese, Traditional**.
 4. Switch to it with the normal macOS Input Source shortcut.

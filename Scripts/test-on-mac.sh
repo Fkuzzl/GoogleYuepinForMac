@@ -62,8 +62,10 @@ echo "Verifying input-source metadata..."
 bundle_identifier="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "${info_plist}")"
 language="$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "${info_plist}")"
 minimum_system="$(/usr/libexec/PlistBuddy -c 'Print :LSMinimumSystemVersion' "${info_plist}")"
-input_source_identifier="$(/usr/libexec/PlistBuddy -c 'Print :TISInputSourceID' "${info_plist}")"
+input_source_identifier="$(/usr/libexec/PlistBuddy -c 'Print :ComponentInputModeDict:tsInputModeListKey:local.googleyuepinformac.inputmethod.GoogleYuepinIM:TISInputSourceID' "${info_plist}")"
 ui_element="$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "${info_plist}")"
+background_only="$(/usr/libexec/PlistBuddy -c 'Print :LSBackgroundOnly' "${info_plist}")"
+controller_class="$(/usr/libexec/PlistBuddy -c 'Print :InputMethodServerControllerClass' "${info_plist}")"
 
 [[ "${bundle_identifier}" == "local.googleyuepinformac.inputmethod" ]] || {
   echo "error: Unexpected bundle identifier: ${bundle_identifier}"
@@ -77,12 +79,20 @@ ui_element="$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "${info_plist}")"
   echo "error: Unexpected minimum macOS version: ${minimum_system}"
   exit 1
 }
-[[ "${input_source_identifier}" == "local.googleyuepinformac.inputmethod" ]] || {
-  echo "error: Unexpected top-level input-source identifier: ${input_source_identifier}"
+[[ "${input_source_identifier}" == "local.googleyuepinformac.inputmethod.GoogleYuepinIM" ]] || {
+  echo "error: Unexpected component input-mode identifier: ${input_source_identifier}"
   exit 1
 }
 [[ "${ui_element}" == "true" ]] || {
   echo "error: Input method must run as a UI agent."
+  exit 1
+}
+[[ "${background_only}" == "true" ]] || {
+  echo "error: Input method must declare LSBackgroundOnly."
+  exit 1
+}
+[[ "${controller_class}" == "GoogleYuepinInputController" ]] || {
+  echo "error: Unexpected InputMethodKit controller class: ${controller_class}"
   exit 1
 }
 [[ -f "${app}/Contents/Resources/InputSourceIcon.png" ]] || {
