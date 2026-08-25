@@ -65,6 +65,15 @@ Assert-True ($infoText.Contains('<key>LSBackgroundOnly</key><true/>')) 'Info.pli
 Assert-True ($infoText.Contains('<key>InputMethodServerControllerClass</key><string>GoogleYuepinInputController</string>')) 'Info.plist has an unexpected InputMethodKit controller class.'
 Assert-True ($infoText.Contains('<key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>')) 'Info.plist does not use Xcode build versioning.'
 
+foreach ($locale in @('en', 'zh-Hant')) {
+    $localizedInfoPath = Join-Path $ProjectRoot "GoogleYuepinForMac/$locale.lproj/InfoPlist.strings"
+    Assert-True (Test-Path -LiteralPath $localizedInfoPath) "$locale input-source localization is missing."
+    if (Test-Path -LiteralPath $localizedInfoPath) {
+        $localizedInfoText = Get-Content -Raw -LiteralPath $localizedInfoPath
+        Assert-True ($localizedInfoText.Contains('"local.googleyuepinformac.inputmethod.GoogleYuepinIM" = "Google粵拼forMac";')) "$locale input-mode name is missing."
+    }
+}
+
 $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac/GoogleYuepinForMac.entitlements')
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'
 

@@ -38,6 +38,7 @@
 		B0000000000000000000000E /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B0000000000000000000000F /* InputSourceIcon.svg */ = {isa = PBXFileReference; lastKnownFileType = image.svg; path = InputSourceIcon.svg; sourceTree = "<group>"; };
 		B00000000000000000000010 /* prepare-icon.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "prepare-icon.sh"; sourceTree = "<group>"; };
+		B00000000000000000000011 /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B00000000000000000000020 /* GoogleYuepinForMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleYuepinForMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -227,6 +228,7 @@
 		C00000000000000000000005 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
+				B00000000000000000000011 /* InfoPlist.strings */,
 				B0000000000000000000000E /* InfoPlist.strings */,
 			);
 			name = InfoPlist.strings;

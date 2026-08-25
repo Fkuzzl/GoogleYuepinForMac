@@ -47,5 +47,7 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :TISIntendedLanguage' "$app/Contents/Info.plist")" = "yue-Hant"
           test "$(/usr/libexec/PlistBuddy -c 'Print :ComponentInputModeDict:tsInputModeListKey:local.googleyuepinformac.inputmethod.GoogleYuepinIM:TISInputSourceID' "$app/Contents/Info.plist")" = "local.googleyuepinformac.inputmethod.GoogleYuepinIM"
           test "$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "$app/Contents/Info.plist")" = "true"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :local.googleyuepinformac.inputmethod.GoogleYuepinIM' "$app/Contents/Resources/en.lproj/InfoPlist.strings")" = "Google粵拼forMac"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :local.googleyuepinformac.inputmethod.GoogleYuepinIM' "$app/Contents/Resources/zh-Hant.lproj/InfoPlist.strings")" = "Google粵拼forMac"
           test -f "$app/Contents/Resources/InputSourceIcon.png"
           test -f "$app/Contents/PkgInfo"

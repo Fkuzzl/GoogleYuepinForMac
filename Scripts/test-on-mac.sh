@@ -99,6 +99,18 @@ controller_class="$(/usr/libexec/PlistBuddy -c 'Print :InputMethodServerControll
   echo "error: Input-source icon is missing from the built app."
   exit 1
 }
+for locale in en zh-Hant; do
+  localized_info="${app}/Contents/Resources/${locale}.lproj/InfoPlist.strings"
+  [[ -f "${localized_info}" ]] || {
+    echo "error: ${locale} input-source localization is missing."
+    exit 1
+  }
+  localized_mode_name="$(/usr/libexec/PlistBuddy -c 'Print :local.googleyuepinformac.inputmethod.GoogleYuepinIM' "${localized_info}")"
+  [[ "${localized_mode_name}" == "Google粵拼forMac" ]] || {
+    echo "error: Unexpected ${locale} input-mode name: ${localized_mode_name}"
+    exit 1
+  }
+done
 [[ -f "${app}/Contents/PkgInfo" ]] || {
   echo "error: PkgInfo is missing from the built app."
   exit 1
