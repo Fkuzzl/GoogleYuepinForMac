@@ -22,6 +22,7 @@ $requiredFiles = @(
     'Sources/GoogleYuepinCore/CompositionEngine.swift',
     'Sources/GoogleYuepinCore/GoogleResponseParser.swift',
     'Tests/GoogleYuepinCoreTests/Fixtures/nei-success.json',
+    'Scripts/test-on-mac.sh',
     'Scripts/install-local.sh'
 )
 

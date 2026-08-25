@@ -40,9 +40,7 @@ powershell -ExecutionPolicy Bypass -File .\Scripts\validate.ps1 -LiveEndpoint
 On macOS:
 
 ```zsh
-swift test
-xcodebuild -project GoogleYuepinForMac.xcodeproj -scheme GoogleYuepinForMac -configuration Release -derivedDataPath .build/xcode build
-codesign --verify --deep --strict .build/xcode/Build/Products/Release/GoogleYuepinForMac.app
+/bin/zsh Scripts/test-on-mac.sh
 ```
 
 Runtime acceptance must cover TextEdit, Notes, Safari, and VS Code; input-source switching; candidate selection/paging; punctuation; cancellation; and network-disabled fallback.

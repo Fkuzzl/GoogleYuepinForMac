@@ -18,6 +18,12 @@ jobs:
       - name: Run core tests
         run: swift test
 
+      - name: Validate Mac scripts
+        run: |
+          /bin/zsh -n Scripts/test-on-mac.sh
+          /bin/zsh -n Scripts/install-local.sh
+          /bin/zsh -n Scripts/prepare-icon.sh
+
       - name: Build InputMethodKit application
         run: |
           xcodebuild \

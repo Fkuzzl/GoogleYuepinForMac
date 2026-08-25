@@ -35,17 +35,19 @@ Requirements:
 - Xcode 16+
 - Command Line Tools selected in Xcode Settings → Locations
 
-Clone the private repository, then run:
+Authenticate GitHub CLI and clone the private repository:
 
 ```zsh
+gh auth login --hostname github.com --git-protocol https --web
+gh repo clone Fkuzzl/GoogleYuepinForMac
 cd GoogleYuepinForMac
-swift test
-xcodebuild \
-  -project GoogleYuepinForMac.xcodeproj \
-  -scheme GoogleYuepinForMac \
-  -configuration Release \
-  -derivedDataPath .build/xcode \
-  build
+```
+
+Run the Mac preflight. It checks the machine and Xcode setup, runs the core tests,
+builds the signed Release app, and verifies the input-source metadata:
+
+```zsh
+/bin/zsh Scripts/test-on-mac.sh
 ```
 
 The built input source will be at:
@@ -72,6 +74,12 @@ Then:
 6. Switch to it with the normal macOS Input Source shortcut.
 
 Test in TextEdit first: type `nei`, confirm `你` appears, and press Space.
+
+To inspect or build the project in Xcode, run:
+
+```zsh
+open GoogleYuepinForMac.xcodeproj
+```
 
 ## Privacy
 
