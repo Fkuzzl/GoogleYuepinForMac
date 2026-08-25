@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "GoogleYuepinForMac",
-    platforms: [.macOS(.v15)],
+    platforms: [.macOS("15.0")],
     products: [
         .library(name: "GoogleYuepinCore", targets: ["GoogleYuepinCore"]),
     ],
