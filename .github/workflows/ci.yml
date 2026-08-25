@@ -25,8 +25,19 @@ jobs:
           /bin/zsh -n Scripts/install-local.sh
           /bin/zsh -n Scripts/prepare-icon.sh
 
-      - name: Build InputMethodKit application
-        run: /bin/zsh Scripts/build-local.sh
+      - name: Build InputMethodKit application without private signing credentials
+        run: |
+          user_temp="${TMPDIR:-/private/tmp}"
+          derived_data="${user_temp%/}/GoogleYuepinForMacDerivedData"
+          xcodebuild \
+            -project GoogleYuepinForMac.xcodeproj \
+            -scheme GoogleYuepinForMac \
+            -configuration Release \
+            -derivedDataPath "$derived_data" \
+            CODE_SIGNING_ALLOWED=NO \
+            CURRENT_PROJECT_VERSION="${GITHUB_RUN_NUMBER}" \
+            GENERATE_PKGINFO_FILE=YES \
+            build
 
       - name: Verify built metadata
         run: |
@@ -38,4 +49,3 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "$app/Contents/Info.plist")" = "true"
           test -f "$app/Contents/Resources/InputSourceIcon.png"
           test -f "$app/Contents/PkgInfo"
-          codesign --verify --deep --strict "$app"

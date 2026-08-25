@@ -61,9 +61,15 @@ Assert-True ($infoText.Contains('<string>Hant</string>')) 'Info.plist does not d
 Assert-True ($infoText.Contains('local.googleyuepinformac.inputmethod.GoogleYuepinIM')) 'Input mode ID is missing from Info.plist.'
 Assert-True ($infoText.Contains('<key>TISInputSourceID</key><string>local.googleyuepinformac.inputmethod</string>')) 'Top-level input-source ID is missing from Info.plist.'
 Assert-True ($infoText.Contains('<key>LSUIElement</key><true/>')) 'Info.plist does not mark the input method as a UI agent.'
+Assert-True ($infoText.Contains('<key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>')) 'Info.plist does not use Xcode build versioning.'
 
 $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac/GoogleYuepinForMac.entitlements')
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'
+
+$projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
+Assert-True ($projectText.Contains('CODE_SIGN_IDENTITY = "Apple Development";')) 'Xcode target does not use Apple Development signing.'
+Assert-True ($projectText.Contains('CODE_SIGN_STYLE = Automatic;')) 'Xcode target does not use automatic signing.'
+Assert-True (-not $projectText.Contains('CODE_SIGN_IDENTITY = "-";')) 'Xcode target still contains an ad-hoc signing identity.'
 Assert-True ($entitlementsText.Contains('com.apple.security.temporary-exception.mach-register.global-name')) 'InputMethodKit Mach entitlement is missing.'
 Assert-True ($entitlementsText.Contains('local.googleyuepinformac.inputmethod_Connection')) 'InputMethodKit connection entitlement is inconsistent.'
 

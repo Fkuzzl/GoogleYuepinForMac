@@ -94,6 +94,16 @@ ui_element="$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' "${info_plist}")"
   exit 1
 }
 
+signature_details="$(/usr/bin/codesign -d --verbose=4 "${app}" 2>&1)"
+if /usr/bin/grep -q '^Signature=adhoc$' <<< "${signature_details}"; then
+  echo "error: Mac preflight found an ad-hoc signature."
+  exit 1
+fi
+if ! /usr/bin/grep -q '^Authority=Apple Development:' <<< "${signature_details}"; then
+  echo "error: Mac preflight did not find an Apple Development signature."
+  exit 1
+fi
+
 echo "Mac preflight: PASS"
 echo "Built app: ${app}"
 echo "Next: /bin/zsh Scripts/install-local.sh"

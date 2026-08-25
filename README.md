@@ -34,6 +34,8 @@ Requirements:
 - macOS 15+
 - Xcode 16+
 - Command Line Tools selected in Xcode Settings → Locations
+- An Apple ID added in Xcode Settings → Accounts, with an Apple Development
+  certificate available for your Personal Team or paid development team
 
 Authenticate GitHub CLI and clone the private repository:
 
@@ -44,12 +46,20 @@ cd GoogleYuepinForMac
 ```
 
 Run the Mac preflight. It checks the machine and Xcode setup, runs the core tests,
-builds the Release app with a local ad-hoc signature, and verifies the
-input-source metadata. A paid Apple Developer account is not required for this
-personal installation:
+builds the Release app with Xcode automatic signing, rejects an ad-hoc result,
+and verifies the input-source metadata. A paid Apple Developer account is not
+required for a personal installation; Xcode can use a Personal Team:
 
 ```zsh
 /bin/zsh Scripts/test-on-mac.sh
+```
+
+The script uses the team configured in the Xcode project. If it is not stored
+there, it attempts to resolve the only Apple Development team in your login
+keychain. When multiple teams exist, select one explicitly:
+
+```zsh
+GOOGLE_YUEPIN_DEVELOPMENT_TEAM=YOUR10CHARID /bin/zsh Scripts/test-on-mac.sh
 ```
 
 The preflight prints the exact built-app path. By default, DerivedData is placed
@@ -61,7 +71,7 @@ with `GOOGLE_YUEPIN_DERIVED_DATA`.
 ## Install for local testing
 
 Installation writes to the current user's `~/Library/Input Methods` directory.
-This location supports the local ad-hoc signature used by the personal build. If
+The installed app retains the Apple Development signature produced by Xcode. If
 an older development copy exists in `/Library/Input Methods`, the installer asks
 for your Mac administrator password once to remove that duplicate:
 
