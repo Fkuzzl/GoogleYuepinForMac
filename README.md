@@ -66,14 +66,13 @@ Installation writes to `/Library/Input Methods` and therefore asks for your Mac 
 /bin/zsh Scripts/install-local.sh
 ```
 
-Then:
+The installer registers and enables the source for the current user. Then:
 
-1. Log out of macOS and log in again.
-2. Open System Settings → Keyboard → Text Input → Edit.
-3. Click `+`.
-4. Select **Cantonese, Traditional**.
-5. Add **Google粵拼forMac**.
-6. Switch to it with the normal macOS Input Source shortcut.
+1. Check the macOS input menu for **Google粵拼forMac**.
+2. If it is not shown immediately, log out of macOS and log in again.
+3. If needed, open System Settings → Keyboard → Text Input → Edit, click `+`,
+   and look under **Cantonese, Traditional**.
+4. Switch to it with the normal macOS Input Source shortcut.
 
 Test in TextEdit first: type `nei`, confirm `你` appears, and press Space.
 

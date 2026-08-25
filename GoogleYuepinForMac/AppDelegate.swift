@@ -5,6 +5,9 @@ import os.log
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    private static let bundleIdentifier = "local.googleyuepinformac.inputmethod"
+    private static let inputModeIdentifier = "local.googleyuepinformac.inputmethod.GoogleYuepinIM"
+
     static let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "local.googleyuepinformac.inputmethod",
         category: "input-method"
@@ -36,15 +39,46 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         Self.logger.notice("GoogleYuepinForMac input method server started")
     }
 
-    static func handleRegistrationArgument() -> Bool {
-        guard CommandLine.arguments.contains("--register") else { return false }
+    static func handleRegistrationArgument() -> Int32? {
+        guard CommandLine.arguments.contains("--register") else { return nil }
         let result = TISRegisterInputSource(Bundle.main.bundleURL as CFURL)
         if result != noErr {
             fputs("Failed to register input source (OSStatus \(result)).\n", stderr)
-            return true
+            return 1
         }
-        print("Registered GoogleYuepinForMac. Add it in System Settings > Keyboard > Text Input.")
-        return true
+
+        let enabledCount = enableRegisteredInputSources()
+        guard enabledCount > 0 else {
+            fputs("Registered the app, but macOS did not discover its input sources.\n", stderr)
+            return 1
+        }
+
+        print("Registered and enabled GoogleYuepinForMac (\(enabledCount) input source records).")
+        return 0
+    }
+
+    private static func enableRegisteredInputSources() -> Int {
+        let expectedIdentifiers: Set<String> = [bundleIdentifier, inputModeIdentifier]
+        guard let inputSources = TISCreateInputSourceList(nil, true).takeRetainedValue() as? [TISInputSource] else {
+            return 0
+        }
+
+        var enabledCount = 0
+        for inputSource in inputSources {
+            guard let property = TISGetInputSourceProperty(inputSource, kTISPropertyInputSourceID) else {
+                continue
+            }
+            let identifier = Unmanaged<CFString>.fromOpaque(property).takeUnretainedValue() as String
+            guard expectedIdentifiers.contains(identifier) else { continue }
+
+            let result = TISEnableInputSource(inputSource)
+            if result == noErr {
+                enabledCount += 1
+            } else {
+                fputs("Failed to enable \(identifier) (OSStatus \(result)).\n", stderr)
+            }
+        }
+        return enabledCount
     }
 
     private static func applicationSupportURL() throws -> URL {
