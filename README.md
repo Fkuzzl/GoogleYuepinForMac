@@ -60,7 +60,10 @@ with `GOOGLE_YUEPIN_DERIVED_DATA`.
 
 ## Install for local testing
 
-Installation writes to `/Library/Input Methods` and therefore asks for your Mac administrator password in Terminal:
+Installation writes to the current user's `~/Library/Input Methods` directory.
+This location supports the local ad-hoc signature used by the personal build. If
+an older development copy exists in `/Library/Input Methods`, the installer asks
+for your Mac administrator password once to remove that duplicate:
 
 ```zsh
 /bin/zsh Scripts/install-local.sh
