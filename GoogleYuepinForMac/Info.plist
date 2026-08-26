@@ -41,7 +41,7 @@
     <key>InputMethodConnectionName</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)_Connection</string>
     <key>InputMethodServerControllerClass</key><string>GoogleYuepinInputController</string>
     <key>InputMethodServerDelegateClass</key><string>GoogleYuepinInputController</string>
-    <key>LSBackgroundOnly</key><true/>
+    <key>LSBackgroundOnly</key><false/>
     <key>LSMinimumSystemVersion</key><string>15.0</string>
     <key>LSUIElement</key><true/>
     <key>NSPrincipalClass</key><string>NSApplication</string>

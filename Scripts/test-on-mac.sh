@@ -87,8 +87,8 @@ controller_class="$(/usr/libexec/PlistBuddy -c 'Print :InputMethodServerControll
   echo "error: Input method must run as a UI agent."
   exit 1
 }
-[[ "${background_only}" == "true" ]] || {
-  echo "error: Input method must declare LSBackgroundOnly."
+[[ "${background_only}" == "false" ]] || {
+  echo "error: Input method must run as a UI agent rather than a background-only app."
   exit 1
 }
 [[ "${controller_class}" == "GoogleYuepinInputController" ]] || {
@@ -123,6 +123,11 @@ if /usr/bin/grep -q '^Signature=adhoc$' <<< "${signature_details}"; then
 fi
 if ! /usr/bin/grep -q '^Authority=Apple Development:' <<< "${signature_details}"; then
   echo "error: Mac preflight did not find an Apple Development signature."
+  exit 1
+fi
+signed_entitlements="$(/usr/bin/codesign -d --entitlements :- "${app}" 2>&1)"
+if /usr/bin/grep -q 'com.apple.security.get-task-allow' <<< "${signed_entitlements}"; then
+  echo "error: Release input method contains the development-only get-task-allow entitlement."
   exit 1
 fi
 

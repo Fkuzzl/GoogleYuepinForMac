@@ -61,7 +61,7 @@ Assert-True ($infoText.Contains('<string>Hant</string>')) 'Info.plist does not d
 Assert-True ($infoText.Contains('local.googleyuepinformac.inputmethod.GoogleYuepinIM')) 'Input mode ID is missing from Info.plist.'
 Assert-True (-not $infoText.Contains('<key>TISInputSourceID</key><string>local.googleyuepinformac.inputmethod</string>')) 'Info.plist contains a conflicting top-level input-source ID.'
 Assert-True ($infoText.Contains('<key>LSUIElement</key><true/>')) 'Info.plist does not mark the input method as a UI agent.'
-Assert-True ($infoText.Contains('<key>LSBackgroundOnly</key><true/>')) 'Info.plist does not mark the input method as background-only.'
+Assert-True ($infoText.Contains('<key>LSBackgroundOnly</key><false/>')) 'Info.plist incorrectly marks the input method as background-only.'
 Assert-True ($infoText.Contains('<key>InputMethodServerControllerClass</key><string>GoogleYuepinInputController</string>')) 'Info.plist has an unexpected InputMethodKit controller class.'
 Assert-True ($infoText.Contains('<key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>')) 'Info.plist does not use Xcode build versioning.'
 
@@ -85,6 +85,7 @@ Assert-True ($installerText.Contains('/usr/bin/sudo /usr/sbin/chown -R root:whee
 $projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
 Assert-True ($projectText.Contains('CODE_SIGN_IDENTITY = "Apple Development";')) 'Xcode target does not use Apple Development signing.'
 Assert-True ($projectText.Contains('CODE_SIGN_STYLE = Automatic;')) 'Xcode target does not use automatic signing.'
+Assert-True ($projectText.Contains('CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;')) 'Xcode target still injects development-only base entitlements.'
 Assert-True (-not $projectText.Contains('CODE_SIGN_IDENTITY = "-";')) 'Xcode target still contains an ad-hoc signing identity.'
 Assert-True ($entitlementsText.Contains('com.apple.security.temporary-exception.mach-register.global-name')) 'InputMethodKit Mach entitlement is missing.'
 Assert-True ($entitlementsText.Contains('local.googleyuepinformac.inputmethod_Connection')) 'InputMethodKit connection entitlement is inconsistent.'

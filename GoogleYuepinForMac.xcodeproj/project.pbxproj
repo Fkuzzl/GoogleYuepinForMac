@@ -244,6 +244,7 @@
 			ARCHS = arm64;
 			CODE_SIGN_ENTITLEMENTS = GoogleYuepinForMac/GoogleYuepinForMac.entitlements;
 			CODE_SIGN_IDENTITY = "Apple Development";
+			CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 			CODE_SIGN_STYLE = Automatic;
 			CURRENT_PROJECT_VERSION = 1;
 			DEVELOPMENT_TEAM = 9PN6LNZ453;
@@ -266,6 +267,7 @@
 			ARCHS = arm64;
 			CODE_SIGN_ENTITLEMENTS = GoogleYuepinForMac/GoogleYuepinForMac.entitlements;
 			CODE_SIGN_IDENTITY = "Apple Development";
+			CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 			CODE_SIGN_STYLE = Automatic;
 			CURRENT_PROJECT_VERSION = 1;
 			DEVELOPMENT_TEAM = 9PN6LNZ453;
