@@ -78,14 +78,17 @@ $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'Googl
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'
 
 $installerText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'Scripts/install-local.sh')
+$readmeText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'README.md')
 Assert-True ($installerText.Contains('destination_directory="/Library/Input Methods"')) 'Local installer does not use the system input-method directory.'
 Assert-True ($installerText.Contains('legacy_user_app="${HOME}/Library/Input Methods/GoogleYuepinForMac.app"')) 'Local installer does not clean up the earlier user-local copy.'
 Assert-True ($installerText.Contains('/usr/bin/sudo /usr/sbin/chown -R root:wheel "${destination_app}"')) 'System-wide input method is not secured with root ownership.'
+Assert-True ($installerText.Contains('macOS did not discover the Apple Development-signed input method.')) 'Installer does not diagnose Personal Team TIS rejection.'
 
 $projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
 Assert-True ($projectText.Contains('CODE_SIGN_IDENTITY = "Apple Development";')) 'Xcode target does not use Apple Development signing.'
 Assert-True ($projectText.Contains('CODE_SIGN_STYLE = Automatic;')) 'Xcode target does not use automatic signing.'
 Assert-True ($projectText.Contains('CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;')) 'Xcode target still injects development-only base entitlements.'
+Assert-True ($readmeText.Contains('Developer ID-signed and notarized build')) 'README does not document the signing requirement for affected Macs.'
 Assert-True (-not $projectText.Contains('CODE_SIGN_IDENTITY = "-";')) 'Xcode target still contains an ad-hoc signing identity.'
 Assert-True ($entitlementsText.Contains('com.apple.security.temporary-exception.mach-register.global-name')) 'InputMethodKit Mach entitlement is missing.'
 Assert-True ($entitlementsText.Contains('local.googleyuepinformac.inputmethod_Connection')) 'InputMethodKit connection entitlement is inconsistent.'

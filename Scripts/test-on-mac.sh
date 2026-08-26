@@ -121,8 +121,8 @@ if /usr/bin/grep -q '^Signature=adhoc$' <<< "${signature_details}"; then
   echo "error: Mac preflight found an ad-hoc signature."
   exit 1
 fi
-if ! /usr/bin/grep -q '^Authority=Apple Development:' <<< "${signature_details}"; then
-  echo "error: Mac preflight did not find an Apple Development signature."
+if ! /usr/bin/grep -Eq '^Authority=(Apple Development|Developer ID Application|Apple Distribution):' <<< "${signature_details}"; then
+  echo "error: Mac preflight did not find a supported Apple signing identity."
   exit 1
 fi
 signed_entitlements="$(/usr/bin/codesign -d --entitlements :- "${app}" 2>&1)"
@@ -133,4 +133,8 @@ fi
 
 echo "Mac preflight: PASS"
 echo "Built app: ${app}"
+if /usr/bin/grep -q '^Authority=Apple Development:' <<< "${signature_details}"; then
+  echo "Warning: this Personal Team build can run core tests, but macOS may reject it"
+  echo "when scanning system-wide InputMethodKit apps. The installer reports that case explicitly."
+fi
 echo "Next: /bin/zsh Scripts/install-local.sh"

@@ -92,6 +92,16 @@ for attempt in {1..10}; do
 done
 
 if [[ "${enabled}" != true ]]; then
+  signature_details="$(/usr/bin/codesign -d --verbose=4 "${destination_app}" 2>&1)"
+  if /usr/bin/grep -q '^Authority=Apple Development:' <<< "${signature_details}"; then
+    echo "error: macOS did not discover the Apple Development-signed input method."
+    echo "The installed bundle and signature are valid, but this Mac rejects the"
+    echo "Personal Team build during its Text Input Source policy scan. Logging out"
+    echo "again or repeating registration will not make this build appear."
+    echo "A Developer ID-signed and notarized build is required for end-to-end TIS testing on this Mac."
+    exit 1
+  fi
+
   echo "Installed ${destination_app}"
   echo "Registration succeeded, but macOS has not refreshed input sources in this login session."
   echo "Log out of macOS and log back in, then add Google粵拼forMac in:"
