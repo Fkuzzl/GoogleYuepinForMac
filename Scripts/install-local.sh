@@ -5,9 +5,9 @@ project_root="${0:A:h:h}"
 user_temp="${TMPDIR:-/private/tmp}"
 derived_data="${GOOGLE_YUEPIN_DERIVED_DATA:-${user_temp%/}/GoogleYuepinForMacDerivedData}"
 source_app="${derived_data}/Build/Products/Release/GoogleYuepinForMac.app"
-destination_directory="${HOME}/Library/Input Methods"
+destination_directory="/Library/Input Methods"
 destination_app="${destination_directory}/GoogleYuepinForMac.app"
-legacy_system_app="/Library/Input Methods/GoogleYuepinForMac.app"
+legacy_user_app="${HOME}/Library/Input Methods/GoogleYuepinForMac.app"
 legacy_source_app="${project_root}/.build/xcode/Build/Products/Release/GoogleYuepinForMac.app"
 xcode_derived_data_root="${HOME}/Library/Developer/Xcode/DerivedData"
 lsregister="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister"
@@ -21,24 +21,24 @@ if [[ ! -d "${source_app}" ]]; then
   exit 1
 fi
 
-if [[ -d "${legacy_system_app}" || -d "${destination_app}" ]]; then
+if [[ -d "${legacy_user_app}" || -d "${destination_app}" ]]; then
   /usr/bin/osascript -e 'tell application id "local.googleyuepinformac.inputmethod" to quit' >/dev/null 2>&1 || true
 fi
 
-if [[ -d "${legacy_system_app}" ]]; then
-  echo "Removing the earlier system-wide development copy..."
-  "${lsregister}" -u "${legacy_system_app}" >/dev/null 2>&1 || true
-  /usr/bin/sudo /bin/rm -rf "${legacy_system_app}"
+if [[ -d "${legacy_user_app}" ]]; then
+  echo "Removing the earlier user-local development copy..."
+  "${lsregister}" -u "${legacy_user_app}" >/dev/null 2>&1 || true
+  /bin/rm -rf "${legacy_user_app}"
 fi
 
 if [[ -d "${destination_app}" ]]; then
   "${lsregister}" -u "${destination_app}" >/dev/null 2>&1 || true
-  /bin/rm -rf "${destination_app}"
+  /usr/bin/sudo /bin/rm -rf "${destination_app}"
 fi
 
-/bin/mkdir -p "${destination_directory}"
-/usr/bin/ditto "${source_app}" "${destination_app}"
-/usr/bin/xattr -cr "${destination_app}"
+/usr/bin/sudo /bin/mkdir -p "${destination_directory}"
+/usr/bin/sudo /usr/bin/ditto "${source_app}" "${destination_app}"
+/usr/bin/sudo /usr/bin/xattr -cr "${destination_app}"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "${destination_app}"
 
 # TIS can reject an otherwise valid input source when another app bundle on

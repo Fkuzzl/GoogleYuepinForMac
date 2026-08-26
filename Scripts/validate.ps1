@@ -77,6 +77,10 @@ foreach ($locale in @('en', 'zh-Hant')) {
 $entitlementsText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac/GoogleYuepinForMac.entitlements')
 Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'Network client entitlement is missing.'
 
+$installerText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'Scripts/install-local.sh')
+Assert-True ($installerText.Contains('destination_directory="/Library/Input Methods"')) 'Local installer does not use the system input-method directory.'
+Assert-True ($installerText.Contains('legacy_user_app="${HOME}/Library/Input Methods/GoogleYuepinForMac.app"')) 'Local installer does not clean up the earlier user-local copy.'
+
 $projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
 Assert-True ($projectText.Contains('CODE_SIGN_IDENTITY = "Apple Development";')) 'Xcode target does not use Apple Development signing.'
 Assert-True ($projectText.Contains('CODE_SIGN_STYLE = Automatic;')) 'Xcode target does not use automatic signing.'

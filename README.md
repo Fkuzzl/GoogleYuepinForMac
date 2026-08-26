@@ -70,11 +70,13 @@ with `GOOGLE_YUEPIN_DERIVED_DATA`.
 
 ## Install for local testing
 
-Installation writes to the current user's `~/Library/Input Methods` directory.
-The app must have an Apple Development signature; an ad-hoc signature is not
-accepted by current macOS input-source discovery. If an older development copy
-exists in `/Library/Input Methods`, the installer asks
-for your Mac administrator password once to remove that duplicate:
+Installation writes to the system-wide `/Library/Input Methods` directory,
+which current macOS versions reliably scan for third-party InputMethodKit apps.
+The installer asks for your Mac administrator password to copy the app there.
+This does not require a paid Apple Developer account: the app keeps its Apple
+Development signature from your Personal Team. An ad-hoc signature is not
+accepted by current macOS input-source discovery. Any older user-local copy in
+`~/Library/Input Methods` is removed to avoid duplicate input-source IDs:
 
 ```zsh
 /bin/zsh Scripts/install-local.sh
