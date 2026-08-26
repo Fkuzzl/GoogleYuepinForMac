@@ -80,6 +80,7 @@ Assert-True ($entitlementsText.Contains('com.apple.security.network.client')) 'N
 $installerText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'Scripts/install-local.sh')
 Assert-True ($installerText.Contains('destination_directory="/Library/Input Methods"')) 'Local installer does not use the system input-method directory.'
 Assert-True ($installerText.Contains('legacy_user_app="${HOME}/Library/Input Methods/GoogleYuepinForMac.app"')) 'Local installer does not clean up the earlier user-local copy.'
+Assert-True ($installerText.Contains('/usr/bin/sudo /usr/sbin/chown -R root:wheel "${destination_app}"')) 'System-wide input method is not secured with root ownership.'
 
 $projectText = Get-Content -Raw -LiteralPath (Join-Path $ProjectRoot 'GoogleYuepinForMac.xcodeproj/project.pbxproj')
 Assert-True ($projectText.Contains('CODE_SIGN_IDENTITY = "Apple Development";')) 'Xcode target does not use Apple Development signing.'

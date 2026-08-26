@@ -39,6 +39,7 @@ fi
 /usr/bin/sudo /bin/mkdir -p "${destination_directory}"
 /usr/bin/sudo /usr/bin/ditto "${source_app}" "${destination_app}"
 /usr/bin/sudo /usr/bin/xattr -cr "${destination_app}"
+/usr/bin/sudo /usr/sbin/chown -R root:wheel "${destination_app}"
 /usr/bin/codesign --verify --deep --strict --verbose=2 "${destination_app}"
 
 # TIS can reject an otherwise valid input source when another app bundle on

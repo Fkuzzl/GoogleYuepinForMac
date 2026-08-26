@@ -75,8 +75,10 @@ which current macOS versions reliably scan for third-party InputMethodKit apps.
 The installer asks for your Mac administrator password to copy the app there.
 This does not require a paid Apple Developer account: the app keeps its Apple
 Development signature from your Personal Team. An ad-hoc signature is not
-accepted by current macOS input-source discovery. Any older user-local copy in
-`~/Library/Input Methods` is removed to avoid duplicate input-source IDs:
+accepted by current macOS input-source discovery. The installed bundle is owned
+by `root:wheel`, like other system-wide input methods, so it is not user-writable
+code in a privileged directory. Any older user-local copy in `~/Library/Input
+Methods` is removed to avoid duplicate input-source IDs:
 
 ```zsh
 /bin/zsh Scripts/install-local.sh
