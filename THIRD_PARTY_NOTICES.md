@@ -1,5 +1,9 @@
 # Third-party notices
 
+> Project status: **Archived on 2026-08-28**. These notices are retained with
+> the source after development stopped because no paid Apple Developer Program
+> licence was available.
+
 ## gcantonese-ime
 
 The input workflow and Google Input Tools request/response behaviour were derived from:

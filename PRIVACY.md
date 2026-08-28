@@ -1,6 +1,19 @@
 # Privacy
 
+> [!CAUTION]
+> **Archived project.** Development stopped on 2026-08-28 because no paid Apple
+> Developer Program licence was available. A Personal Team build was installed
+> on a physical Mac but rejected by TIS discovery, so live composition was not
+> tested.
+
 Google粵拼forMac is an online-first input source.
+
+> [!NOTE]
+> This document describes the archived implementation's intended data flow. The
+> paid Apple Developer workflow exists in source, but the paid deployment was
+> not actually tested on a machine and the input source was never activated for
+> typing. Runtime privacy behavior is therefore code-reviewed and test-backed
+> where possible, not live-typing verified.
 
 ## Data sent
 
